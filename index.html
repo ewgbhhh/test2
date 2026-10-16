@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UI</title>
@@ -3414,6 +3415,351 @@
             color: #ddd;
             font-size: 12px;
         }
+
+
+/* ================= Soft Dusk redesign (visual layer only) ================= */
+:root{
+  --sd-surface: 17, 19, 28;
+  --sd-text: #e9ecf6;
+  --sd-muted: #8f95aa;
+  --sd-line: rgba(255,255,255,.07);
+}
+
+/* ---- main card: flat, rounded, no heavy blur ---- */
+.PWrapper .PBanner{border-radius:.8vw .8vw 0 0 !important}
+.PWrapper .PBanner img{border-radius:.8vw .8vw 0 0 !important;filter:saturate(1.05)}
+.PWrapper .PBanner::after{height:100%;top:0;background:linear-gradient(180deg,rgba(var(--sd-surface),0) 55%,rgba(var(--sd-surface),.95) 100%)}
+.PWrapper .PElements .PRightElements{
+  background:rgba(var(--sd-surface),.93);
+  border:1px solid var(--sd-line);
+  border-top:0;
+  border-radius:0 0 .8vw .8vw;
+  backdrop-filter:none;
+  box-shadow:0 .7vw 1.6vw rgba(0,0,0,.42),0 0 0 1px rgba(var(--menu-color),.08);
+}
+
+/* ---- category chips ---- */
+.PWrapper .PCategories{background:transparent;backdrop-filter:none;gap:.22vw;padding:.28vw .4vw;height:1.6vw;box-sizing:content-box}
+.PWrapper .PCategories .PCategory{
+  border:0;border-radius:999px;background:rgba(255,255,255,.05);
+  color:var(--sd-muted);font-weight:500;
+}
+.PWrapper .PCategories .PCategory.active{
+  background:rgba(var(--menu-color),.2);color:#fff;border:0;
+  box-shadow:inset 0 0 0 1px rgba(var(--menu-color),.65);
+}
+
+/* ---- list ---- */
+.PWrapper .PTabs{
+  background:transparent;border:0;border-top:1px solid var(--sd-line);
+  border-radius:0;backdrop-filter:none;
+}
+.PWrapper .PTabs > div:first-child{
+  left:.15vw;width:calc(100% - .3vw) !important;border-radius:.5vw;
+  background:linear-gradient(90deg,rgba(var(--menu-color),.32),rgba(var(--menu-color),.06)) !important;
+  box-shadow:inset .15vw 0 0 rgb(var(--menu-color));
+}
+.PWrapper .PTabs .PTab{border-radius:.5vw}
+.PWrapper .PTabs .PTab.active{background:transparent;box-shadow:none}
+.PWrapper .PTabs .PTab .PTLabel,
+.PWrapper .PTabs .PTab .PTDLabel{color:var(--sd-muted);font-weight:400;left:.45vw}
+.PWrapper .PTabs .PTab.active .PTLabel,
+.PWrapper .PTabs .PTab.active .PTDLabel{color:#fff;font-weight:500}
+.PWrapper .PTabs .PTab i,.PWrapper .PTabs .PTab svg{color:rgba(255,255,255,.4)}
+.PWrapper .PTabs .PTab.active i,.PWrapper .PTabs .PTab.active svg{color:#fff}
+
+/* ---- toggle ---- */
+.PWrapper .PTabs .PTab .TOptions .Checkbox,
+.PWrapper .PTabs .PTab .Checkbox{
+  background:rgba(255,255,255,.14);border-radius:999px !important;
+  transition:background 180ms ease,box-shadow 180ms ease;
+}
+.PWrapper .PTabs .PTab .TOptions .Checkbox.Checked,
+.PWrapper .PTabs .PTab .Checkbox.Checked{
+  background:rgb(var(--menu-color));
+  box-shadow:0 0 .55vw rgba(var(--menu-color),.45);
+}
+.PWrapper .PTabs .PTab .Checkbox .Inside{box-shadow:0 .05vw .15vw rgba(0,0,0,.35)}
+
+/* ---- slider ---- */
+.PWrapper .PTabs .PTab .TOptions .Slider,
+.PWrapper .PTabs .PTab .Slider{
+  background-color:rgba(255,255,255,.14) !important;
+  height:.2vw !important;border-radius:999px !important;
+}
+.PWrapper .PTabs .PTab .TOptions .Slider .Progress,
+.PWrapper .PTabs .PTab .Slider .Progress{
+  background:linear-gradient(90deg,rgba(var(--menu-color),.55),rgb(var(--menu-color))) !important;
+  border-radius:999px !important;
+}
+.PWrapper .PTabs .PTab .TOptions .Slider .Progress .Thumb,
+.PWrapper .PTabs .PTab .Slider .Progress .Thumb{
+  width:.46vw !important;height:.46vw !important;border-radius:50% !important;
+  background:#fff;box-shadow:0 0 0 .12vw rgba(var(--menu-color),.55) !important;
+}
+
+/* ---- scrollable value (arrows dimmed) ---- */
+.PWrapper .PTabs .PTab .Scrollable{color:#fff;font-weight:500}
+.PWrapper .PTabs .PTab .Scrollable span:first-child,
+.PWrapper .PTabs .PTab .Scrollable span:last-child{opacity:.4}
+
+/* ---- section divider ---- */
+.PWrapper .PTabs .PTab .Divider .Left,
+.PWrapper .PTabs .PTab .Divider .Right{
+  height:.05vw;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.18)) ;
+}
+.PWrapper .PTabs .PTab .Divider .Right{background:linear-gradient(270deg,rgba(255,255,255,0),rgba(255,255,255,.18))}
+.PWrapper .PTabs .PTab .Divider .Label{
+  font-size:.5vw;letter-spacing:.09vw;text-transform:uppercase;font-weight:600;
+  color:rgba(var(--menu-color),1);
+}
+.PWrapper .PTabs .PTab.active .Divider .Label{color:#fff}
+.PWrapper .PTabs .PTab.active .Divider .Left,
+.PWrapper .PTabs .PTab.active .Divider .Right{background:rgba(var(--menu-color),.8)}
+
+/* ---- left scroll indicator ---- */
+.PWrapper .PElements .PScroll{background:rgba(255,255,255,.08)}
+.PWrapper .PElements .PScroll .PSProgress{background:rgb(var(--menu-color));box-shadow:0 0 .4vw rgba(var(--menu-color),.6)}
+
+/* ---- footer ---- */
+.PWrapper .PFooter{background:rgba(255,255,255,.03);border-top:1px solid var(--sd-line);border-radius:0 0 .8vw .8vw}
+.PWrapper .PFooter .PBuild{color:var(--sd-muted)}
+.PWrapper .PFooter .PIndicator{
+  color:#fff;font-weight:500;padding:.12vw .4vw;border-radius:999px;
+  background:rgba(var(--menu-color),.2);line-height:1;
+}
+
+/* ---- side info card ---- */
+.PWrapper .Metadata{
+  background:rgba(var(--sd-surface),.93);border:1px solid var(--sd-line);
+  border-radius:.8vw;padding:.65vw;backdrop-filter:none;
+  box-shadow:0 .5vw 1.2vw rgba(0,0,0,.38);
+}
+.PWrapper .Metadata .Title span{color:#fff;font-weight:600}
+.PWrapper .Metadata .Line{background:var(--sd-line)}
+.PWrapper .Metadata .Values .Value .Key{color:var(--sd-muted)}
+.PWrapper .Metadata .Values .Value .Val span{color:var(--sd-text);font-weight:500}
+.PWrapper .Metadata .Values .Value .Val .Status{border-radius:999px}
+
+/* ---- hint tooltip ---- */
+.Desc{
+  background:rgba(var(--sd-surface),.93);border:1px solid var(--sd-line);
+  border-radius:999px;padding:14px 20px;color:var(--sd-text);
+}
+
+/* ---- notifications ---- */
+.Notification{
+  background:rgba(var(--sd-surface),.95) !important;
+  border:1px solid var(--sd-line) !important;
+  border-radius:.7vw !important;backdrop-filter:none !important;
+  box-shadow:0 .4vw 1vw rgba(0,0,0,.35) !important;
+}
+
+/* ---- input bar ---- */
+.InputWrapper{background:rgba(var(--sd-surface),.95);border-radius:14px;border:1px solid var(--sd-line)}
+.InputWrapper .Header{background:transparent}
+.InputWrapper .Header::after{background:rgba(var(--menu-color),.7)}
+
+/* ---- keybind list ---- */
+.KBLWrapper{background:rgba(var(--sd-surface),.9);border:1px solid var(--sd-line);border-radius:.7vw}
+.KBLWrapper .Header{background-color:transparent;border-bottom:1px solid rgba(var(--menu-color),.6)}
+
+/* ---- no sideways jitter while navigating ---- */
+.PWrapper .PTabs{transform:none !important;transition:height 300ms ease,max-height 300ms ease !important}
+.PWrapper .PTabs > div:first-child{left:.15vw !important;transform:none !important}
+
+/* ---- lighter on GPU: drop remaining blurs ---- */
+/* ================= v2: closer to reference menus ================= */
+.PWrapper .PElements .PRightElements{
+  background:rgba(14,15,22,.80);
+  backdrop-filter:blur(8px) !important;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:0 0 .9vw .9vw;
+}
+.PWrapper .PBanner,.PWrapper .PBanner img{border-radius:.9vw .9vw 0 0 !important}
+
+/* category tabs: plain text, active = filled pill */
+.PWrapper .PCategories{gap:.15vw;padding:.3vw .5vw;height:1.5vw;background:transparent}
+.PWrapper .PCategories .PCategory{
+  background:transparent;box-shadow:none;color:rgba(255,255,255,.85);
+  font-weight:600;border-radius:.45vw;
+}
+.PWrapper .PCategories .PCategory.active{
+  background:linear-gradient(180deg,rgba(var(--menu-color),.75),rgba(var(--menu-color),.5));
+  box-shadow:0 0 .6vw rgba(var(--menu-color),.45),inset 0 0 0 1px rgba(255,255,255,.18);
+  color:#fff;
+}
+.PWrapper .PTabs{border-top:0}
+
+/* rows: white text, outlined selected bar */
+.PWrapper .PTabs .PTab .PTLabel,
+.PWrapper .PTabs .PTab .PTDLabel{color:rgba(255,255,255,.92);font-weight:500;left:.4vw}
+.PWrapper .PTabs .PTab.active .PTLabel,
+.PWrapper .PTabs .PTab.active .PTDLabel{color:#fff;font-weight:600}
+.PWrapper .PTabs > div:first-child{
+  box-sizing:border-box;border-radius:.45vw;
+  background:rgba(var(--menu-color),.30) !important;
+  border:1px solid rgba(var(--menu-color),.85);
+  box-shadow:0 0 .7vw rgba(var(--menu-color),.25);
+}
+
+/* toggles: dark pill off, accent pill on */
+.PWrapper .PTabs .PTab .Checkbox,
+.PWrapper .PTabs .PTab .TOptions .Checkbox{
+  background:rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.PWrapper .PTabs .PTab .Checkbox .Inside{background:rgba(255,255,255,.55)}
+.PWrapper .PTabs .PTab .Checkbox.Checked,
+.PWrapper .PTabs .PTab .TOptions .Checkbox.Checked{
+  background:rgb(var(--menu-color));box-shadow:0 0 .5vw rgba(var(--menu-color),.5);
+}
+.PWrapper .PTabs .PTab .Checkbox.Checked .Inside{background:#fff}
+
+/* sliders: accent fill + white knob */
+.PWrapper .PTabs .PTab .TOptions .Slider,
+.PWrapper .PTabs .PTab .Slider{background-color:rgba(255,255,255,.2) !important;height:.16vw !important}
+.PWrapper .PTabs .PTab .TOptions .Slider .Progress,
+.PWrapper .PTabs .PTab .Slider .Progress{background:rgb(var(--menu-color)) !important}
+.PWrapper .PTabs .PTab .TOptions .Slider .Progress .Thumb,
+.PWrapper .PTabs .PTab .Slider .Progress .Thumb{
+  width:.5vw !important;height:.5vw !important;
+  box-shadow:0 0 .35vw rgba(0,0,0,.5) !important;
+}
+
+/* section headers: centered white caps */
+.PWrapper .PTabs .PTab .Divider .Label,
+.PWrapper .PTabs .PTab.active .Divider .Label{color:#fff;font-weight:700;font-size:.52vw;letter-spacing:.12vw}
+.PWrapper .PTabs .PTab .Divider .Left,
+.PWrapper .PTabs .PTab .Divider .Right,
+.PWrapper .PTabs .PTab.active .Divider .Left,
+.PWrapper .PTabs .PTab.active .Divider .Right{height:.04vw}
+.PWrapper .PTabs .PTab .Divider .Left{background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.35))}
+.PWrapper .PTabs .PTab .Divider .Right{background:linear-gradient(270deg,rgba(255,255,255,0),rgba(255,255,255,.35))}
+.PWrapper .PTabs .PTab.active .Divider .Left{background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.35))}
+.PWrapper .PTabs .PTab.active .Divider .Right{background:linear-gradient(270deg,rgba(255,255,255,0),rgba(255,255,255,.35))}
+
+/* footer: accent text + outlined counter pill */
+.PWrapper .PFooter{background:rgba(0,0,0,.35);border-radius:0 0 .9vw .9vw}
+.PWrapper .PFooter .PBuild{color:rgb(var(--menu-color));font-weight:500}
+.PWrapper .PFooter .PIndicator{
+  color:#fff;font-weight:600;padding:.12vw .45vw;border-radius:.3vw;
+  background:rgba(var(--menu-color),.35);box-shadow:inset 0 0 0 1px rgba(var(--menu-color),.8);
+}
+
+.PWrapper .PBanner,.PWrapper .PTabs,.PWrapper .PCategories,.PWrapper .Metadata{backdrop-filter:none !important}
+/* ================= v3: Destroyer-style (matches reference screenshot) ================= */
+.PWrapper .PCategories .PCategory,.PWrapper .PTabs .PTab .PTLabel,.PWrapper .PTabs .PTab .PTDLabel,
+.PWrapper .PTabs .PTab .Scrollable,.PWrapper .PTabs .PTab .Divider .Label,.PWrapper .PFooter,
+.Desc,.Notification{font-family:"Montserrat","Poppins","Segoe UI",system-ui,sans-serif}
+
+/* panel parts: header block / list / separate footer bar */
+.PWrapper .PElements .PRightElements{
+  background:transparent !important;border:0 !important;box-shadow:none !important;
+  backdrop-filter:none !important;border-radius:0 !important;overflow:visible !important;
+}
+.PWrapper .PBanner,.PWrapper .PBanner img{border-radius:.5vw .5vw 0 0 !important}
+.PWrapper .PBanner{background:rgba(0,0,0,.8)}
+.PWrapper .PBanner::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;top:auto;width:100%;
+  height:.08vw;min-height:1px;background:rgb(var(--menu-color));box-shadow:none;
+}
+
+/* tab bar: flat black, active = dark-to-accent gradient */
+.PWrapper .PCategories{
+  background:#000 !important;gap:0;padding:0;height:1.5vw;box-sizing:border-box;
+  border-radius:0;backdrop-filter:none !important;
+}
+.PWrapper .PCategories .PCategory{
+  flex:1;height:100%;background:transparent;box-shadow:none;border-radius:0;
+  color:#fff;font-weight:500;text-shadow:0 1px 2px rgba(0,0,0,.75);
+}
+.PWrapper .PCategories .PCategory.active{
+  background:linear-gradient(90deg,rgba(var(--menu-color),.04) 0%,rgba(var(--menu-color),.18) 18%,rgba(var(--menu-color),.42) 50%,rgba(var(--menu-color),.18) 82%,rgba(var(--menu-color),.04) 100%);
+  box-shadow:inset 0 1px rgba(0,0,0,.72),inset 0 -1px rgba(0,0,0,.72);
+  font-weight:700;
+}
+
+/* list */
+.PWrapper .PTabs{
+  background:rgba(0,0,0,.8) !important;border:0 !important;border-top:1px solid #000 !important;
+  border-radius:0 0 .5vw .5vw !important;backdrop-filter:none !important;
+}
+.PWrapper .PTabs > div:first-child{
+  left:0 !important;width:100% !important;border:0;border-radius:0;
+  background:rgba(var(--menu-color),.2) !important;
+  box-shadow:inset 0 .07vw 0 rgb(var(--menu-color)),inset 0 -.07vw 0 rgb(var(--menu-color));
+}
+.PWrapper .PTabs .PTab{border-radius:0;margin-left:0;margin-right:0;padding:0 .3vw}
+.PWrapper .PTabs .PTab .PTLabel,.PWrapper .PTabs .PTab .PTDLabel{
+  color:#fff;font-weight:500;text-shadow:0 1px 2px rgba(0,0,0,.75);
+}
+.PWrapper .PTabs .PTab.active .PTLabel,.PWrapper .PTabs .PTab.active .PTDLabel{
+  font-weight:700;text-shadow:.07vw .1vw .18vw rgba(0,0,0,.95);
+}
+.PWrapper .PTabs .PTab i,.PWrapper .PTabs .PTab svg,
+.PWrapper .PTabs .PTab.active i,.PWrapper .PTabs .PTab.active svg{color:rgb(var(--menu-color))}
+
+/* toggle: grey pill, white knob, accent knob when on */
+.PWrapper .PTabs .PTab .Checkbox,.PWrapper .PTabs .PTab .TOptions .Checkbox{
+  width:1.94vw;height:.93vw;background:#555 !important;box-shadow:none !important;
+}
+.PWrapper .PTabs .PTab .Checkbox .Inside,.PWrapper .PTabs .PTab .TOptions .Checkbox .Inside{
+  width:.72vw;height:.72vw;left:.095vw;background:#fff;box-shadow:none;
+}
+.PWrapper .PTabs .PTab .Checkbox.Checked .Inside,.PWrapper .PTabs .PTab .TOptions .Checkbox.Checked .Inside{
+  left:1.125vw;background:rgb(var(--menu-color));
+}
+
+/* slider: grey track, white fill + knob */
+.PWrapper .PTabs .PTab .Slider,.PWrapper .PTabs .PTab .TOptions .Slider{
+  background-color:#2e2e2e !important;height:.25vw !important;border-radius:999px !important;
+}
+.PWrapper .PTabs .PTab .Slider .Progress,.PWrapper .PTabs .PTab .TOptions .Slider .Progress{
+  background:#fff !important;border-radius:999px !important;
+}
+.PWrapper .PTabs .PTab .Slider .Progress .Thumb,.PWrapper .PTabs .PTab .TOptions .Slider .Progress .Thumb{
+  width:.37vw !important;height:.37vw !important;background:#fff;
+  box-shadow:0 0 .09vw rgba(0,0,0,.45) !important;
+}
+
+/* < value > selector */
+.PWrapper .PTabs .PTab .Scrollable{font-weight:500;color:#fff}
+.PWrapper .PTabs .PTab .Scrollable span:first-child,.PWrapper .PTabs .PTab .Scrollable span:last-child{opacity:1}
+
+/* section divider: white lines + capitalised label */
+.PWrapper .PTabs .PTab .Divider .Left,.PWrapper .PTabs .PTab .Divider .Right,
+.PWrapper .PTabs .PTab.active .Divider .Left,.PWrapper .PTabs .PTab.active .Divider .Right{
+  height:1px;background:rgba(255,255,255,.9);
+}
+.PWrapper .PTabs .PTab .Divider .Label,.PWrapper .PTabs .PTab.active .Divider .Label{
+  color:#fff;font-weight:600;font-size:.62vw;letter-spacing:.03vw;text-transform:capitalize;
+  text-shadow:0 1px 2px rgba(0,0,0,.75);
+}
+
+/* side scroll bar */
+.PWrapper .PElements .PScroll{background:#000;border-radius:.05vw}
+.PWrapper .PElements .PScroll .PSProgress{
+  background:rgb(var(--menu-color));border-radius:.06vw;
+  box-shadow:0 0 .04vw rgba(var(--menu-color),.72),0 0 .09vw rgba(var(--menu-color),.48),0 0 .15vw rgba(var(--menu-color),.28);
+}
+
+/* footer: separate rounded bar */
+.PWrapper .PFooter{
+  margin-top:.24vw;height:1.34vw;background:rgba(0,0,0,.92) !important;border:0 !important;
+  border-radius:.5vw !important;box-shadow:none;
+}
+.PWrapper .PFooter .PBuild{color:#fff;font-size:.62vw;font-weight:500;left:.4vw}
+.PWrapper .PFooter .PFooterLogo{display:none}
+.PWrapper .PFooter .PIndicator{
+  color:#fff;font-size:.55vw;font-weight:600;right:.5vw;padding:0;background:transparent;box-shadow:none;border-radius:0;
+}
+
+/* side card, hint, notifications, input, keybinds */
+.PWrapper .Metadata{background:rgba(0,0,0,.8);border:0;border-radius:.5vw;box-shadow:none}
+.Desc{background:rgba(0,0,0,.9);border:0;border-radius:3px;padding:6px 9px;box-shadow:0 0 11px rgba(0,0,0,.5);color:#fff}
+.Notification{background:rgba(15,15,16,.94) !important;border:0 !important;border-radius:.2vw !important;box-shadow:none !important}
+.InputWrapper{background:rgba(15,15,16,.94);border:1px solid rgb(var(--menu-color));border-radius:8px}
+.KBLWrapper{background:rgba(0,0,0,.8);border:1px solid #2a2a2a;border-radius:3px}
 
 </style>
 </head>
@@ -16590,8 +16936,8 @@ const Vg = () => {
       , [a,h] = L.useState(null)
       , [m,d] = L.useState(0)
       , [y,g] = L.useState({
-        link: "https://cdn.phototourl.com/free/2026-08-11-5ae59eb3-fb41-4bcb-bcda-13c4d007c380.png",
-        color: "0, 127, 255"
+        link: "https://cdn.discordapp.com/attachments/818896116715749449/1478449452028264599/42103e1154e629331f823fc2de2a555f.gif?ex=6ad3b559&is=6ad263d9&hm=798b20970dd5a7f983b4428d99a2147532c00b60e3cae01a62318447fd5f2020&",
+        color: "0, 1, 11"
     })
       , [v,P] = L.useState("0vw")
       , [f,c] = L.useState("1.5625vw")
