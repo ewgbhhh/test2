@@ -2668,84 +2668,6 @@
             border-left: 1px solid rgba(255, 255, 255, 0.14);
             color: rgba(255, 255, 255, 0.72);
         }
-        .InvspelWrapper {
-            position: absolute;
-            display: flex;
-            right: 1.0417vw;
-            top: 9vw;
-            width: 8.2vw;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-family: Inter;
-            border-radius: .62vw;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.48);
-            box-shadow: 0 .18vw .55vw rgba(0, 0, 0, 0.16);
-            backdrop-filter: none;
-            z-index: 9998;
-        }
-        .InvspelWrapper .Header {
-            position: relative;
-            display: flex;
-            width: 100%;
-            height: 1.0417vw;
-            justify-content: flex-start;
-            align-items: center;
-            flex-direction: row;
-            gap: .1042vw;
-            padding: 0 .25vw;
-            background-color: rgba(0, 0, 0, 0.64);
-            border-bottom: .0521vw solid rgb(var(--menu-color));
-        }
-        .InvspelWrapper .Header span {
-            margin-left: .1042vw;
-            font-size: .5208vw;
-            font-weight: 350;
-            line-height: 1;
-            color: #fff;
-            letter-spacing: 0;
-        }
-        .InvspelWrapper .Players {
-            position: relative;
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: .12vw;
-            background-color: rgba(0, 0, 0, 0.36);
-            padding: .2vw;
-        }
-        .InvspelWrapper .PlayerRow {
-            width: 100%;
-            min-height: .9vw;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 .24vw;
-            font-size: .52vw;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: .18vw;
-        }
-        .InvspelWrapper .PlayerRow .Left {
-            max-width: 65%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .InvspelWrapper .PlayerRow .Right {
-            color: rgb(var(--menu-color));
-            font-weight: 600;
-        }
-        .InvspelWrapper .Empty {
-            width: 100%;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: .5vw;
-            padding: .2vw 0;
-        }
         .SelectedPlayersOverlay {
             position: fixed;
             inset: 0;
@@ -3761,6 +3683,144 @@
 .InputWrapper{background:rgba(15,15,16,.94);border:1px solid rgb(var(--menu-color));border-radius:8px}
 .KBLWrapper{background:rgba(0,0,0,.8);border:1px solid #2a2a2a;border-radius:3px}
 
+
+/* ================= v4: freecam / keybinds / spectators list / notify ================= */
+
+/* ---- freecam: pill options, selected = glowing accent pill ---- */
+.FCWrapper{
+  font-family:"Montserrat","Poppins","Segoe UI",system-ui,sans-serif !important;
+  gap:.2vw;padding:.45vw .5vw;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+}
+.FCWrapper .Option{
+  font-family:"Montserrat","Poppins","Segoe UI",system-ui,sans-serif !important;
+  justify-content:center;text-align:center;white-space:nowrap;
+  min-height:1.3vw;padding:0 1vw;border-radius:999px;
+  font-size:.68vw;font-weight:500;color:rgba(255,255,255,.82);
+  background:rgba(8,9,12,.55);border:1px solid rgba(255,255,255,.07);
+  transition:transform 200ms ease,background 200ms ease,color 200ms ease,box-shadow 200ms ease,border-color 200ms ease;
+}
+.FCWrapper .Option.Selected{
+  color:#fff;font-weight:700;
+  background:linear-gradient(90deg,rgba(var(--menu-color),.62),rgba(var(--menu-color),.28));
+  border:1px solid rgba(var(--menu-color),.95);
+  box-shadow:0 0 .9vw rgba(var(--menu-color),.45),inset 0 0 .5vw rgba(255,255,255,.08);
+  transform:scale(1.07);
+}
+.FCWrapper .Option.Selected::before,
+.FCWrapper .Option.Selected::after{content:none}
+
+/* ---- keybinds: card + keycap chips + On/Off pills ---- */
+.KBLWrapper{
+  width:8.6vw;border-radius:.9vw;
+  background:rgba(10,11,14,.88);border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 .4vw 1.1vw rgba(0,0,0,.45);
+  font-family:"Montserrat","Poppins","Segoe UI",system-ui,sans-serif;
+}
+.KBLWrapper .Header{
+  height:1.5vw;padding:0 .55vw;gap:.25vw;
+  background:linear-gradient(90deg,rgba(var(--menu-color),.28),rgba(var(--menu-color),0) 85%);
+  border-bottom:1px solid rgba(var(--menu-color),.55);
+}
+.KBLWrapper .Header .Icon{margin-left:0}
+.KBLWrapper .Header span{font-size:.58vw;font-weight:700;letter-spacing:.05vw;text-transform:uppercase}
+.KBLWrapper .Keybinds{background:transparent;padding:.3vw;gap:.18vw}
+.KBLWrapper .Keybinds .Keybind{
+  height:1.15vw;border-radius:999px;
+  background:rgba(255,255,255,.04);
+}
+.KBLWrapper .Keybinds .Keybind:hover{background:rgba(255,255,255,.08)}
+.KBLWrapper .Keybinds .Keybind .Label{left:.5vw;font-size:.56vw;font-weight:500;color:rgba(255,255,255,.92);max-width:4.2vw}
+.KBLWrapper .Keybinds .Keybind .Elements{right:.28vw;gap:.18vw}
+.KBLWrapper .Keybinds .Keybind .Elements span{font-size:.5vw;font-weight:600}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyLabel{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:.85vw;height:.8vw;padding:0 .26vw;box-sizing:border-box;
+  border-radius:.28vw;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);border-bottom-width:.12vw;
+  color:#fff !important;
+}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyState{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:1.1vw;height:.8vw;padding:0 .3vw;box-sizing:border-box;border-radius:999px;
+  font-weight:700;
+}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyState.on{
+  color:#fff !important;background:rgba(var(--menu-color),.9);
+  box-shadow:0 0 .45vw rgba(var(--menu-color),.55);
+}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyState.off{
+  color:rgba(255,255,255,.55) !important;background:rgba(255,255,255,.08);
+}
+
+/* ---- notify: oval / pill shape ---- */
+.Notification{
+  border-radius:999px !important;
+  padding:.34vw .8vw .4vw .42vw !important;
+  min-height:2.1vw;
+  background:rgba(12,13,16,.9) !important;
+  border:1px solid rgba(var(--accent),.5) !important;
+  box-shadow:0 .3vw .9vw rgba(0,0,0,.4),0 0 .7vw rgba(var(--accent),.18) !important;
+  gap:.4vw;
+}
+.NotificationAccent{display:none}
+.NotificationIcon{width:.95vw;height:.95vw}
+.NotificationIcon::before{font-size:.55vw}
+.NotificationContent{padding-right:.1vw}
+.NotificationProgress{left:.9vw;right:.9vw;bottom:.14vw;height:.1vw;border-radius:999px}
+.NotificationProgress::after{border-radius:999px}
+.NotificationCount{top:50%;right:.5vw;transform:translateY(-50%)}
+/* legacy #notify-wrap cards too */
+.notify{border-radius:999px;padding:12px 24px 12px 20px}
+.notify::before{display:none}
+
+/* ================= v5: light keybinds ================= */
+.KBLWrapper{
+  width:7.4vw;border-radius:.6vw;
+  background:rgba(0,0,0,.34);border:0;box-shadow:none;
+}
+.KBLWrapper .Header{
+  height:1.2vw;padding:0 .5vw;gap:.22vw;
+  background:transparent;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.KBLWrapper .Header span{
+  font-size:.54vw;font-weight:500;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.85);
+}
+.KBLWrapper .Header .Icon{opacity:.9}
+.KBLWrapper .Keybinds{padding:.22vw .1vw;gap:0;background:transparent}
+.KBLWrapper .Keybinds .Keybind{
+  height:.95vw;border-radius:0;background:transparent;
+}
+.KBLWrapper .Keybinds .Keybind:hover{background:transparent}
+.KBLWrapper .Keybinds .Keybind .Label{
+  left:.5vw;font-size:.54vw;font-weight:400;color:rgba(255,255,255,.8);
+}
+.KBLWrapper .Keybinds .Keybind .Elements{right:.5vw;gap:.16vw}
+.KBLWrapper .Keybinds .Keybind .Elements span{font-size:.54vw;font-weight:500}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyLabel{
+  display:inline;min-width:0;height:auto;padding:0;border:0;border-radius:0;
+  background:transparent;color:rgba(255,255,255,.95) !important;
+}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyState{
+  display:inline;min-width:0;height:auto;padding:0;border-radius:0;
+  background:transparent;box-shadow:none;font-weight:500;
+}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyState.on{
+  color:rgb(var(--menu-color)) !important;background:transparent;box-shadow:none;
+}
+.KBLWrapper .Keybinds .Keybind .Elements .KeyState.off{
+  color:rgba(255,255,255,.4) !important;background:transparent;
+}
+
+/* ================= v6: keybinds solid background ================= */
+.KBLWrapper{
+  background:#0e0f13 !important;
+  border:1px solid #23252c;
+  backdrop-filter:none;
+}
+.KBLWrapper .Header{background:#14161b;border-bottom:1px solid #23252c}
+.KBLWrapper .Keybinds{background:#0e0f13}
 </style>
 </head>
 <body>
@@ -17711,7 +17771,7 @@ const bg = () => {
                                 },
                                 children: i.type == "checkbox" || i.type == "slider-checkbox" ? `(${i.keyLabel})` : `${i.keyLabel}`
                             }), (i.type == "checkbox" || i.type == "slider-checkbox") && x("span", {
-                                className: "KeyState",
+                                className: i.checked ? "KeyState on" : "KeyState off",
                                 style: {
                                     color: i.checked ? "white" : "rgba(255, 255, 255, 0.50)"
                                 },
@@ -17785,69 +17845,6 @@ const Zg = () => {
                 }), x("span", {
                     children: `${n.fps || 0} FPS`
                 })]
-            })]
-        })
-    })
-}
-;
-const Jg = () => {
-    const [e,t] = L.useState(!1)
-      , [n,r] = L.useState([])
-      , [o,i] = L.useState({
-        posX: 1.0417,
-        posY: 9.0
-    });
-    return di() && L.useEffect( () => {
-        t(!0)
-    }
-    , []),
-    L.useEffect( () => {
-        const l = s => {
-            const u = s.data;
-            u && u.action === "displayInvspel" && (typeof u.visible == "boolean" && t(u.visible),
-            Array.isArray(u.players) && r(u.players),
-            i(a => ({
-                posX: typeof u.posX == "number" ? u.posX : a.posX,
-                posY: typeof u.posY == "number" ? u.posY : a.posY
-            })))
-        }
-        ;
-        return window.addEventListener("message", l),
-        () => window.removeEventListener("message", l)
-    }
-    , []),
-    x(bt, {
-        mounted: e,
-        transition: "fade",
-        duration: 300,
-        timingFunction: "ease",
-        children: l => U("div", {
-            className: "InvspelWrapper",
-            style: {
-                ...l,
-                right: `${o.posX}vw`,
-                top: `${o.posY}vw`
-            },
-            children: [x("div", {
-                className: "Header",
-                children: x("span", {
-                    children: "show invisible"
-                })
-            }), x("div", {
-                className: "Players",
-                children: n.length === 0 ? x("div", {
-                    className: "Empty",
-                    children: "No nearby/invisible players"
-                }) : n.map( (s, u) => U("div", {
-                    className: "PlayerRow",
-                    children: [x("div", {
-                        className: "Left",
-                        children: s.name || "Unknown"
-                    }), x("div", {
-                        className: "Right",
-                        children: s.hidden ? "Hidden" : s.distance || "0.0m"
-                    })]
-                }, `${s.name || "p"}-${u}`))
             })]
         })
     })
@@ -18223,7 +18220,7 @@ const Qg = ["WEAPON_APPISTOL", "WEAPON_PISTOL", "WEAPON_SMG", "WEAPON_ASSAULTRIF
     theme: {
         ...Ay
     },
-    children: [x(Vg, {}), x(Wg, {}), x(Bg, {}), x(bg, {}), x(Jg, {}), x(Zg, {}), x(SelectedPlayersOverlay, {}), x(AllPlayersOverlay, {}), x(WeaponPreview, {}), x(Yg, {})]
+    children: [x(Vg, {}), x(Wg, {}), x(Bg, {}), x(bg, {}), x(Zg, {}), x(SelectedPlayersOverlay, {}), x(AllPlayersOverlay, {}), x(WeaponPreview, {}), x(Yg, {})]
 });
 if (di()) {
     const e = document.getElementById("root");
