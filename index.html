@@ -18106,6 +18106,8 @@ const Qg = ["WEAPON_APPISTOL", "WEAPON_PISTOL", "WEAPON_SMG", "WEAPON_ASSAULTRIF
             }, {
                 label: "Ram Vehicle"
             }, {
+                label: "Spawn Vehicle"
+            }, {
                 label: "Spawn Object"
             }, {
                 label: "Physics Gun"
@@ -18130,7 +18132,7 @@ const Qg = ["WEAPON_APPISTOL", "WEAPON_PISTOL", "WEAPON_SMG", "WEAPON_ASSAULTRIF
       , [objectRandomizer,setObjectRandomizer] = L.useState(!1)
     , [C,E] = L.useState(0)
       , a = L.useRef([])
-    , h = (d, y) => r !== y ? d.label : d.label === "Shoot Weapon" ? `${d.label}: (${Qg[i]})` : d.label === "Shoot Nearby Players" ? `${d.label}: (${NearbyFreecamWeapons[s]})` : d.label === "Ram Vehicle" ? `${d.label}: (${RamVehicleModels[ramIdx]}) | ${RamVehicleSpeeds[ramSpeedIdx]}` : d.label === "Spawn Object" ? `${d.label}: (${FreecamObjects[v]}) [R] Next | [Q] Random ${objectRandomizer ? "ON" : "OFF"}` : d.label === "Explode" ? `${d.label}: (${ExplodeMethods[C]})` : d.label;
+    , h = (d, y) => r !== y ? d.label : d.label === "Shoot Weapon" ? `${d.label}: (${Qg[i] || "Unknown Weapon"})` : d.label === "Shoot Nearby Players" ? `${d.label}: (${NearbyFreecamWeapons[s] || "Unknown Weapon"})` : d.label === "Ram Vehicle" ? `${d.label}: (${RamVehicleModels[ramIdx] || RamVehicleModels[0]}) | ${RamVehicleSpeeds[ramSpeedIdx] || RamVehicleSpeeds[0]}` : d.label === "Spawn Vehicle" ? `${d.label}: (${RamVehicleModels[ramIdx] || RamVehicleModels[0] || "Unknown Vehicle"}) [Q/E] Next` : d.label === "Spawn Object" ? `${d.label}: (${FreecamObjects[v] || FreecamObjects[0] || "Unknown Object"}) [R] Next | [Q] Random ${objectRandomizer ? "ON" : "OFF"}` : d.label === "Explode" ? `${d.label}: (${ExplodeMethods[C] || ExplodeMethods[0]})` : d.label;
     di() && L.useEffect( () => {
         t(!0)
     }
@@ -18155,7 +18157,7 @@ const Qg = ["WEAPON_APPISTOL", "WEAPON_PISTOL", "WEAPON_SMG", "WEAPON_ASSAULTRIF
             g.nearbyWeaponIndex !== void 0 && u(g.nearbyWeaponIndex - 1),
             g.objectIndex !== void 0 && v(g.objectIndex - 1),
             g.objectRandomizer !== void 0 && setObjectRandomizer(g.objectRandomizer),
-            g.ramVehicleIndex !== void 0 && setRamIdx(g.ramVehicleIndex - 1),
+            g.ramVehicleIndex !== void 0 && setRamIdx(Number.isInteger(g.ramVehicleIndex) && g.ramVehicleIndex >= 1 && g.ramVehicleIndex <= RamVehicleModels.length ? g.ramVehicleIndex - 1 : 0),
             g.ramVehicleSpeedIndex !== void 0 && setRamSpeedIdx(g.ramVehicleSpeedIndex - 1),
             g.explodeIndex !== void 0 && E(g.explodeIndex - 1)),
             g.action === "updateWeapon" && l(g.index - 1),
@@ -18163,7 +18165,7 @@ const Qg = ["WEAPON_APPISTOL", "WEAPON_PISTOL", "WEAPON_SMG", "WEAPON_ASSAULTRIF
             g.action === "updateExplode" && E(g.index - 1),
             g.action === "updateObject" && v(g.index - 1),
             g.action === "updateObjectRandomizer" && setObjectRandomizer(g.enabled),
-            g.action === "updateRamVehicle" && setRamIdx(g.index - 1),
+            g.action === "updateRamVehicle" && setRamIdx(Number.isInteger(g.index) && g.index >= 1 && g.index <= RamVehicleModels.length ? g.index - 1 : 0),
             g.action === "updateRamVehicleSpeed" && setRamSpeedIdx(g.index - 1),
             g.action === "scroll" && (g.direction === "up" ? o(v => (v - 1 + n.length) % n.length) : o(v => (v + 1) % n.length))
         }
